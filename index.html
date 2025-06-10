@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="100" class="">
+  <style>
+    h2 {
+      margin: 8px 0 2px;
+      padding: 0;
+      color: #0366d6;
+      font-weight: 400;
+      font-size: 16px;
+    }
+
+    svg {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .field svg {
+      margin: 0 8px;
+      fill: #959da5;
+      flex-shrink: 0;
+    }
+
+    section > .field {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+
+    svg.bar {
+      margin: 9px 8px;
+    }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-color {
+      width: 8px;
+      height: 8px;
+      border-radius: 100px;
+      flex-shrink: 0;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const svg = document.getElementById('lang-bar-svg');
+      const legend = document.getElementById('lang-legend');
+      const totalWidth = 460;
+      const segments = [
+        { name: 'TypeScript', percent: 25, color: '#3178c6' },
+        { name: 'CMake', percent: 25, color: '#2ecc40' },
+        { name: 'Makefile', percent: 50, color: '#ff4136' }
+      ];
+
+      let x = 0;
+      segments.forEach(seg => {
+        const width = totalWidth * (seg.percent / 100);
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('mask', 'url(#languages-bar)');
+        rect.setAttribute('x', x);
+        rect.setAttribute('y', 0);
+        rect.setAttribute('width', width);
+        rect.setAttribute('height', 8);
+        rect.setAttribute('fill', seg.color);
+        svg.appendChild(rect);
+        x += width;
+      });
+
+      segments.forEach(seg => {
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+
+        const colorBox = document.createElement('div');
+        colorBox.className = 'legend-color';
+        colorBox.style.backgroundColor = seg.color;
+
+        const label = document.createElement('span');
+        label.textContent = `${seg.name} ${seg.percent}%`;
+
+        item.appendChild(colorBox);
+        item.appendChild(label);
+        legend.appendChild(item);
+      });
+    });
+  </script>
+
+  <foreignObject x="0" y="0" width="480" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="items-wrapper" style="width: 100%;">
+      <section>
+        <h2 class="field">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+            <path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 13H8.061l-2.574 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25v-8.5C0 1.784.784 1 1.75 1ZM1.5 2.75v8.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25Zm5.28 1.72a.75.75 0 0 1 0 1.06L5.31 7l1.47 1.47a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-2-2a.75.75 0 0 1 0-1.06l2-2a.75.75 0 0 1 1.06 0Zm2.44 0a.75.75 0 0 1 1.06 0l2 2a.75.75 0 0 1 0 1.06l-2 2a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L10.69 7 9.22 5.53a.75.75 0 0 1 0-1.06Z"></path>
+          </svg>
+          Most used languages
+        </h2>
+      </section>
+      <section class="language-bar">
+        <svg xmlns="http://www.w3.org/2000/svg" class="bar" width="460" height="8" id="lang-bar-svg">
+          <mask id="languages-bar">
+            <rect x="0" y="0" width="460" height="8" fill="white" rx="5"/>
+          </mask>
+        </svg>
+      </section>
+      <section id="lang-legend" class="legend"></section>
+    </div>
+  </foreignObject>
+</svg>
