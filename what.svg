@@ -101,6 +101,9 @@
     });
   </script>
 
+  <script type="application/ecmascript"><![CDATA[
+      alert('Script runs inside SVG!');
+    ]]></script>
   <foreignObject x="0" y="0" width="480" height="100">
     <div xmlns="http://www.w3.org/1999/xhtml" class="items-wrapper" style="width: 100%;">
       <section>
